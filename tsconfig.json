@@ -12,7 +12,8 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "strict": false
+    "strict": false,
+    "allowJs": true
   },
-  "include": ["."]
+  "include": ["index.jsx", "vite.config.js"]
 }

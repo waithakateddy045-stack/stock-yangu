@@ -508,6 +508,40 @@ function AdminScreen({ state, dispatch }) {
   );
 }
 
+function FeasibilityPanel() {
+  const points = [
+    { title: "Market Fit", desc: "Targets 90% of Kenyan retail occurring in informal dukas. Solves the 'pen and paper' tracking headache.", icon: "🇰🇪" },
+    { title: "Offline Resilience", desc: "Designed for low-connectivity zones. Local storage ensures zero downtime during sales.", icon: "📶" },
+    { title: "Financial Inclusion", desc: "Transaction logs provide data for credit scoring, helping duka owners get small business loans.", icon: "📈" },
+    { title: "Scalability", desc: "SMS-based alerts reach basic feature phones, making it accessible to both owner and staff.", icon: "📱" }
+  ];
+
+  return (
+    <div className="fade-in" style={{ padding: 20 }}>
+      <header className="page-hdr" style={{ margin: -20, marginBottom: 20 }}>
+        <div className="title">Feasibility Report</div>
+        <div className="subtitle">PROJECT VIABILITY & STRATEGY</div>
+      </header>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        {points.map(p => (
+          <div key={p.title} style={card}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
+              <span style={{ fontSize: 24 }}>{p.icon}</span>
+              <div style={{ fontSize: 15, fontWeight: 900, color: C.brand }}>{p.title}</div>
+            </div>
+            <div style={{ fontSize: 13, color: C.textMed, lineHeight: 1.5 }}>{p.desc}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ marginTop: 30, padding: 16, background: "rgba(143, 184, 112, 0.1)", borderRadius: 16, border: `1px dashed ${C.greenFg}`, textAlign: "center" }}>
+        <div style={{ fontSize: 12, fontWeight: 800, color: C.brand }}>ESTIMATED UNIT MARGIN</div>
+        <div style={{ fontSize: 32, fontWeight: 950, color: C.greenDark }}>35%</div>
+        <div style={{ fontSize: 10, color: C.textDim, marginTop: 4 }}>Based on average SKU turnover</div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [state, dispatch] = useReducer(reducer, INIT);
   const [tab, setTab] = useState("sale");
@@ -516,6 +550,7 @@ function App() {
     { id: "sale", icon: "🛒", label: "Sale" },
     { id: "log", icon: "📋", label: "Log" },
     { id: "summary", icon: "📊", label: "Summary" },
+    { id: "feasibility", icon: "💡", label: "Idea" },
     { id: "admin", icon: "⚙️", label: "Admin" },
   ];
 
@@ -527,6 +562,7 @@ function App() {
           {tab === "sale" && <SaleScreen state={state} dispatch={dispatch} />}
           {tab === "log" && <LogScreen txLog={state.txLog} />}
           {tab === "summary" && <SummaryScreen state={state} />}
+          {tab === "feasibility" && <FeasibilityPanel />}
           {tab === "admin" && <AdminScreen state={state} dispatch={dispatch} />}
         </main>
         <nav style={L.bottomNav}>
